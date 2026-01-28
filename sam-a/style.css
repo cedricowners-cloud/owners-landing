@@ -332,7 +332,7 @@ body {
 
 /* Form Modal */
 .modal-content.form-modal {
-  max-width: 1000px;
+  max-width: 600px;
   width: 90%;
   text-align: left;
   position: relative;
@@ -485,4 +485,3 @@ body {
     padding: 14px 28px;
   }
 }
-
