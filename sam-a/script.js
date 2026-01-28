@@ -7,7 +7,6 @@ const form = document.getElementById("applicationForm");
 const submitBtn = form.querySelector(".submit-btn");
 const btnText = submitBtn.querySelector(".btn-text");
 const btnLoading = submitBtn.querySelector(".btn-loading");
-const floatingCta = document.querySelector(".floating-cta");
 
 // Business number formatting (000-00-00000)
 const bizInput = document.getElementById("bizNumber");
@@ -91,6 +90,7 @@ form.addEventListener("submit", async function (e) {
     if (GOOGLE_SHEET_URL === "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE") {
       // Demo mode - just show success
       console.log("Demo mode - Form data:", formData);
+      closeModal("formModal");
       showModal("successModal");
       form.reset();
     } else {
@@ -102,6 +102,7 @@ form.addEventListener("submit", async function (e) {
       });
 
       // no-cors 모드에서는 응답을 읽을 수 없으므로 성공으로 처리
+      closeModal("formModal");
       showModal("successModal");
       form.reset();
     }
@@ -151,28 +152,3 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-// Hide floating CTA when form section is in view
-const formSection = document.getElementById("apply");
-const observerOptions = {
-  root: null,
-  rootMargin: "0px",
-  threshold: 0.1,
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      floatingCta.classList.add("hidden");
-    } else {
-      floatingCta.classList.remove("hidden");
-    }
-  });
-}, observerOptions);
-
-observer.observe(formSection);
-
-// Smooth scroll for floating CTA
-floatingCta.addEventListener("click", function (e) {
-  e.preventDefault();
-  formSection.scrollIntoView({ behavior: "smooth" });
-});
