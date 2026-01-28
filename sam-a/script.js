@@ -152,3 +152,20 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
+// Hide floating CTA when bottom CTA section is in view
+const floatingCta = document.querySelector(".floating-cta");
+const bottomCta = document.getElementById("bottomCta");
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        floatingCta.classList.add("hidden");
+      } else {
+        floatingCta.classList.remove("hidden");
+      }
+    });
+  },
+  { threshold: 0.1 },
+);
+observer.observe(bottomCta);
+
